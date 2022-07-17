@@ -1,0 +1,49 @@
+@charset "ISO-8859-1";
+
+body{
+    background: #0d1017;
+    color: white;
+}
+
+.container{
+    
+    padding: 20px;
+}
+
+
+
+.container .title{
+    text-align: center;
+    font-size: 3rem;
+    font-weight: 300;
+}
+
+.form-container{
+    background: #161b21;
+    border-radius: 10px;
+    margin-top: 20px;
+    color: white;
+}
+
+.container .form-control{
+    background: #0d1017;
+    border: none;
+}
+
+a {
+    text-align: right;
+    text-decoration: none;
+}
+
+form{
+    padding: 20px;
+}
+
+
+
+@media screen and (max-width: 1000px) {
+    .container .form-container  {
+      font-size: 8px;
+    }
+  }
+  

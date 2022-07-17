@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd" id="WebApp_ID" version="4.0">
+  <display-name>Seat-Allocation</display-name>
+  <context-param>
+  <param-name>Capacity-of-Floor-1</param-name>
+  <param-value>60</param-value>
+  </context-param>
+  
+  <context-param>
+  <param-name>Capacity-of-Floor-2</param-name>
+  <param-value>88</param-value>
+  </context-param>
+  
+  <context-param>
+  <param-name>Capacity-of-Floor-3</param-name>
+  <param-value>88</param-value>
+  </context-param>
+  
+  <context-param>
+  <param-name>Capacity-of-Floor-4</param-name>
+  <param-value>88</param-value>
+  </context-param>
+  
+  <context-param>
+  <param-name>Capacity-of-Floor-5</param-name>
+  <param-value>70</param-value>
+  </context-param>
+  <welcome-file-list>
+    <welcome-file>LandingPage.jsp</welcome-file>
+    
+  </welcome-file-list>
+</web-app>

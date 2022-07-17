@@ -1,0 +1,14 @@
+@charset "ISO-8859-1";
+
+.header{
+	color: black;
+	text-align: center;
+	padding-top: 10px;
+}
+
+.seatImage{
+	width: 420px;
+	height: 260px;
+	border-radius: 10px;
+	border: 5px solid orange;
+}

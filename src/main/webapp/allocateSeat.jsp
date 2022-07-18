@@ -9,19 +9,91 @@
 		<title>Allocate Seat</title>
 		<link href="${contextPath}/resource/bootstrap.min.css" rel="stylesheet">
 		<link rel="stylesheet" href="allocateSeat.css">
+		<link rel="stylesheet" href="login.css">
 	</head>
 	<body>
 		<jsp:include page="./NavbarAfterLogin.html"></jsp:include>
-		<div class="header">
+		<div class="header" style="padding-top: 5%">
 			<h1>Allocate Seat</h1>
 			<div class="SeatImage">
 				<img class="seatImage" src="Images/Hall-seats.jpg"/>
 			</div>
 		</div>
-		<div class="input-group">
-	    	<input type="text" class="form-control" placeholder="Enter the Floor...">
-	 		<button class="btn btn-warning btn-block" type="button">OK</button>
-	  	</div>
+	
+		<div class="container">
+		<div class="row">
+            <div class="col-md-4"></div>
+            <div class="col-md-4 form-container">
+                <form action=AllocateSeat method="post">
+                    <div class="mb-3">
+                      <label class="col-6 form-label">Employee ID</label>
+                      <input type="text" name=textEmpId class="form-control">
+                    </div>
+					<br/>
+					<div class="mb-3">
+                      <label class="col-6 form-label">Employee Full Name</label>
+                      <input type="text" name=textName class="form-control">
+                    </div>
+					<br/>
+                    <div class="mb-3">
+                        <div class="row">
+                            <div class="col-6 form-label" style="padding-left: 15px">Select Floor</div>
+                        </div>
+                      <select name="floorNo" class="form-select" aria-label=".form-select-lg example" style="color:black">
+						  <option selected>Open this select menu</option>
+						  <option value="1">1</option>
+						  <option value="2">2</option>
+						  <option value="3">3</option>
+						  <option value="4">4</option>
+						  <option value="5">5</option>
+					  </select>
+                    </div>
+                    <br>
+                    <div class="mb-3">
+                        <div class="row">
+                            <div class="col-6 form-label" style="padding-left: 15px">Select Row</div>
+                        </div>
+                      <select name="row_no" class="form-select" aria-label=".form-select-lg example" style="color:black">
+						  <option selected>Open this select menu</option>
+						  <option value="1">1</option>
+						  <option value="2">2</option>
+						  <option value="3">3</option>
+						  <option value="4">4</option>
+						  <option value="5">5</option>
+						  <option value="6">6</option>
+						  <option value="7">7</option>
+						  <option value="8">8</option>
+					  </select>
+                    </div>
+                    <br>
+                    <div class="mb-3">
+                        <div class="row">
+                            <div class="col-6 form-label" style="padding-left: 15px">Select Column</div>
+                        </div>
+                      <select name="col_no" class="form-select" aria-label=".form-select-lg example" style="color:black">
+						  <option selected>Open this select menu</option>
+						  <option value="A">A</option>
+						  <option value="B">B</option>
+						  <option value="C">C</option>
+						  <option value="D">D</option>
+						  <option value="E">E</option>
+						  <option value="F">F</option>
+						  <option value="G">G</option>
+						  <option value="H">H</option>
+						  <option value="I">I</option>
+						  <option value="J">J</option>
+						  <option value="K">K</option>
+					  </select>
+                    </div>
+                    <br>
+                    <button type="submit" class="btn btn-warning btn-lg btn-block w-200">Allocate Seat</button>
+                  </form>
+            </div>
+                        
+        </div>
+
+        
+    </div>
 	
 	</body>
 </html>

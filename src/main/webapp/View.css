@@ -19,16 +19,12 @@
 	padding-top: 30px;
 	
 }
-.card {
-	padding-left: 42%;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-gap: 20px;
+
+
+.details{
+	display:flex;
 }
 
-table{
-	margin-top: 30px;
-	text-align: center;
-	
-}
+
+
 

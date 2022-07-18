@@ -42,7 +42,7 @@
                       <input type="password" name=textPassword class="form-control">
                     </div>
                     <br>
-                    <button type="submit" class="btn btn-warning btn-lg btn-block w-200">Login</button>
+                    <button type="submit" class="btn btn-warning btn-lg btn-block w-200">Sign Up</button>
                   </form>
             </div>
                         

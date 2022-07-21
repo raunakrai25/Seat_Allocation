@@ -48,7 +48,7 @@
                             <div class="col-6 form-label" style="padding-left: 15px">Password</div>
                         </div>
                       <input type="password" name=textPassword class="form-control" id="changePasswordForm" >
-                      <div class="col-6 form-label" id="displayError" style="padding-left: 15px; color: red; visibility: hidden">Invalid Pattern For password</div>
+                      <div class="col-6 form-label" id="displayError" style="padding-left: 15px; color: red; "><%=request.getAttribute("displayError") %></div>
                     </div>
                     <br>
                     <button type="submit" class="btn btn-warning btn-lg btn-block w-200">Sign Up</button>

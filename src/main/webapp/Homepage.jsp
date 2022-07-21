@@ -11,9 +11,17 @@
 		<link rel="stylesheet" href="landingPage.css">
 	</head>
 	<body>
+		<%
+			response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
+			
+			if(session.getAttribute("username")==null){
+				response.sendRedirect("login.jsp");
+			}
+			
+		%>
 		<jsp:include page="./NavbarAfterLogin.html"/>
-		<div class="header">
-			<h1>Welcome, <%=request.getAttribute("Full_name")%></h1>
+		<div class="header" style="padding:5%">
+			<h1>Welcome, <%=request.getParameter("name")%></h1>
 			<br></br>
 			<h3>This Web-Site is built to check Seat allocation</h3>
 			<br></br>

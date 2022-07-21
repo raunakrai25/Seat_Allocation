@@ -12,6 +12,14 @@
 		<link rel="stylesheet" href="SignUp.css">
 	</head>
 	<body>
+		<%
+			response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
+			
+			if(session.getAttribute("username")==null){
+				response.sendRedirect("login.jsp");
+			}
+			
+		%>
 		<jsp:include page="./NavbarAfterLogin.html"></jsp:include>
 		<div class="container">
         <img src="github.png" alt="" class="logo">
@@ -19,7 +27,7 @@
         <div class="row">
             <div class="col-md-4"></div>
             <div class="col-md-4 form-container">
-                <form action=RegisterServlet method="post">
+                <form action=RegisterServlet method="post" >
                 	<div class="mb-3">
                       <label class="col-6 form-label">Full Name</label>
                       <input type="text" name=textName class="form-control">
@@ -39,7 +47,8 @@
                         <div class="row">
                             <div class="col-6 form-label" style="padding-left: 15px">Password</div>
                         </div>
-                      <input type="password" name=textPassword class="form-control">
+                      <input type="password" name=textPassword class="form-control" id="changePasswordForm" >
+                      <div class="col-6 form-label" id="displayError" style="padding-left: 15px; color: red; visibility: hidden">Invalid Pattern For password</div>
                     </div>
                     <br>
                     <button type="submit" class="btn btn-warning btn-lg btn-block w-200">Sign Up</button>
@@ -50,6 +59,7 @@
 
         
     </div>
+    
 		
 	</body>
 </html>

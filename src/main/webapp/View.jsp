@@ -14,9 +14,17 @@
 		<meta charset="ISO-8859-1">
 		<title>View Seats</title>
 		<link href="${contextPath}/resource/bootstrap.min.css" rel="stylesheet">
-		<link rel="stylesheet" href="View.css">
+		<link rel="stylesheet" type="text/css" href="<c:url value = "View.css" />" /> 
 	</head>
 	<body>
+	<%
+			response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
+			
+			if(session.getAttribute("username")==null){
+				response.sendRedirect("login.jsp");
+			}
+			
+		%>
 		<jsp:include page="./NavbarAfterLogin.html"></jsp:include>
 		<div class="header" style="padding-top: 5%">
 			<h1>View Seats</h1>
@@ -30,7 +38,7 @@
 		 		<button class="btn btn-warning btn-block" type="submit" >Check</button>
 		  	</div>
 	  	</form>
-			<div class="card" style="width: 40rem;" align="center">
+			<div class="card" style="width: 40rem;" >
 			  	<div class="card-body">
 			    <h4 class="card-title">Allocated Seats</h4>
 			    <p class="card-text"><%=request.getAttribute("Allocated") %></p>
@@ -40,11 +48,11 @@
 			    <p class="card-text"><%=request.getAttribute("Available") %></p>
 		   		</div>
 		    </div>
-		 <div class ="details" style=""> 
+		  
 		   
 			<h1 align= center>Present Allocated Seats</h1>
 	
-			<table border="1" align=center >
+			<table border="1" align= center >
 				<tr>
 					<th>ID</th>
 					<th>Full Name</th>
@@ -79,6 +87,6 @@
 				%>
 			</table> 
 			
-</div>
+
 	</body>
 </html>

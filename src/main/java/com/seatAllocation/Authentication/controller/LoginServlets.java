@@ -15,6 +15,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  * Servlet implementation class LoginServlets
@@ -53,20 +54,26 @@ public class LoginServlets extends HttpServlet {
 			
 			PreparedStatement preparedStatement = connection.prepareStatement("select Full_name from teamOPDetails where Email=? and password=?");
 		
+			HttpSession session = request.getSession();
+			
 			preparedStatement.setString(1,email);
 			preparedStatement.setString(2,password);
 			
 			ResultSet resultSet = preparedStatement.executeQuery();
 			if(resultSet.next()) {
 				String fullName = resultSet.getString("Full_name");
-				request.setAttribute("Full_name", fullName);
-				RequestDispatcher requestDispatcher = request.getRequestDispatcher("Homepage.jsp");
-				
-				requestDispatcher.forward(request, response);
+				//request.setAttribute("Full_name", fullName);
+				session.setAttribute("username", fullName);
+				if(session!=null) {
+					response.sendRedirect("Homepage.jsp?name=" + fullName);
+				}
+//				RequestDispatcher  = request.getRequestDispatcher("Homepage.jsp"); 
+//				requestDispatcher.forward(request, response);
 			}
 			else {
-				out.println("<font-color=red size=18>Credantials Not Matched");
-				out.println("<a href=/Seat-Allocation/login.jsp>Try Again!!</a>");
+				RequestDispatcher requestDispatcher = request.getRequestDispatcher("login.jsp");
+	            out.println("<font color=red>Password is wrong.</font>");
+	            requestDispatcher.include(request, response);
 			}
 			
 		} catch (ClassNotFoundException e) {

@@ -8,12 +8,20 @@
 		<meta charset="ISO-8859-1">
 		<title>Allocate Seat</title>
 		<link href="${contextPath}/resource/bootstrap.min.css" rel="stylesheet">
-		<link rel="stylesheet" href="allocateSeat.css">
-		<link rel="stylesheet" href="login.css">
+		<link rel="stylesheet" type="text/css" href="<c:url value = "allocateSeat.css" />" /> 
+		<link rel="stylesheet" type="text/css" href="<c:url value = "login.css" />" />
 	</head>
 	<body>
+		<%
+			response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
+			
+			if(session.getAttribute("username")==null){
+				response.sendRedirect("login.jsp");
+			}
+			
+		%>
 		<jsp:include page="./NavbarAfterLogin.html"></jsp:include>
-		<div class="header" style="padding-top: 5%">
+		<div class="header" align=center style="padding-top: 5%">
 			<h1>Allocate Seat</h1>
 			<div class="SeatImage">
 				<img class="seatImage" src="Images/Hall-seats.jpg"/>

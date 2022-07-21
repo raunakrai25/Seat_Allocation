@@ -43,30 +43,59 @@ public class AllocateSeat extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-try {
+		try {
 			PrintWriter out = response.getWriter();
 			Class.forName("com.mysql.cj.jdbc.Driver");
 			Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/seat_allocation", "root", "1234");
+			
 			System.out.print("Connection Established...");
-			String Emp_id = request.getParameter("textEmpId");
-			String Full_name = request.getParameter("textName");
-			String Floor = request.getParameter("floorNo");
-			String Row = request.getParameter("row_no");
-			String Col = request.getParameter("col_no");
-			PreparedStatement preparedStatement = connection.prepareStatement("insert into seatDetails values(?, ?, ?, ?, ? )");		
-			preparedStatement.setString(1,Emp_id);
-			preparedStatement.setString(2,Full_name);
-			preparedStatement.setString(3,Floor);
-			preparedStatement.setString(4,Row);
-			preparedStatement.setString(5,Col);
-			int i = preparedStatement.executeUpdate();
-
-	        if(i > 0) {
-	        	
-	            out.println("Seat successfully removed...");
-	            RequestDispatcher requestDispatcher = request.getRequestDispatcher("View.jsp");
-				requestDispatcher.forward(request, response);
-	        }
+			
+			String emp_id = request.getParameter("textEmpId");
+			String full_name = request.getParameter("textName");
+			String floor = request.getParameter("floorNo");
+			String row = request.getParameter("row_no");
+			String col = request.getParameter("col_no");
+			
+			PreparedStatement preparedStatementToVerify = connection.prepareStatement("select full_name, seat_row, seat_col from seatDetails where floor = ? and seat_row = ? and seat_col = ?;");
+			preparedStatementToVerify.setString(1,floor);
+			preparedStatementToVerify.setString(2,row);
+			preparedStatementToVerify.setString(3,col);
+			
+			ResultSet resultSet = preparedStatementToVerify.executeQuery();
+			
+			System.out.println(resultSet.toString());
+			
+			if(resultSet.next()) {
+				System.out.print("working");
+				String rowDB = resultSet.getString("seat_row");
+				System.out.println("rowDB");
+				String colDB = resultSet.getString("seat_col");
+				System.out.println("colDB");
+				String nameDB = resultSet.getString("full_name");
+				System.out.println("nameDB");
+				if (row.equals(rowDB)&&col.equals(colDB)) {
+					out.println("<font-color=red size=18>Seat already occupied by: "+nameDB);
+					out.println("<a href=/Seat-Allocation/allocateSeat.jsp>Try Again!!</a>");
+				}
+				
+			}else {
+					
+					System.out.println("Working fine till here");
+					PreparedStatement preparedStatementToInseret = connection.prepareStatement("insert into seatDetails values(?, ?, ?, ?, ? )");		
+					preparedStatementToInseret.setString(1,emp_id);
+					preparedStatementToInseret.setString(2,full_name);
+					preparedStatementToInseret.setString(3,floor);
+					preparedStatementToInseret.setString(4,row);
+					preparedStatementToInseret.setString(5,col);
+					int checkStatus = preparedStatementToInseret.executeUpdate();
+					System.out.println(checkStatus);	
+			        if(checkStatus > 0) {
+			        
+			            RequestDispatcher requestDispatcher = request.getRequestDispatcher("View.jsp");
+						requestDispatcher.forward(request, response);
+			        }
+				} 
+			
 
 			
 

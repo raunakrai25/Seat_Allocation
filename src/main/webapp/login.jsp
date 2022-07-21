@@ -10,6 +10,7 @@
 		<title>Login Page</title>
 		<link href="${contextPath}/resource/bootstrap.min.css" rel="stylesheet">
 		<link rel="stylesheet" href="login.css">
+		
 	</head>
 	<body>
 		<jsp:include page="./loginNavbar.html"/>
@@ -19,7 +20,7 @@
         <div class="row">
             <div class="col-md-4"></div>
             <div class="col-md-4 form-container">
-                <form action=LoginServlets method="post">
+                <form action=LoginServlets method="post" >
                     <div class="mb-3">
                       <label class="col-6 form-label">Email address</label>
                       <input type="email" name=textEmail class="form-control">
@@ -31,8 +32,9 @@
                         </div>
                       <input type="password" name=textPassword class="form-control">
                     </div>
+                     
                     <br>
-                    <button type="submit" class="btn btn-warning btn-lg btn-block w-200">Login</button>
+                    <button  type="submit" class="btn btn-warning btn-lg btn-block w-200">Login</button>
                   </form>
             </div>
                         

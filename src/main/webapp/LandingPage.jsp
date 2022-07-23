@@ -10,6 +10,7 @@
 <title>Welcome page</title>
 <link rel="stylesheet" href="landingPage.css">
 <link href="${contextPath}/resource/bootstrap.min.css" rel="stylesheet">
+
 </head>
 <body>
 	<jsp:include page="./loginNavbar.html"/>
@@ -21,7 +22,8 @@
 		<div class="SeatImage">
 			<img class="seatImage" src="Images/IMG20220704182434.jpg"/>
 		</div>
-		
+		<br>
 	</div>
+	<jsp:include page="./footer.html"/>
 </body>
 </html>

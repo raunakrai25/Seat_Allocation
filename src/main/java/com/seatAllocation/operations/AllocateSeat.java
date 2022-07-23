@@ -7,7 +7,15 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Properties;
 
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.PasswordAuthentication;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -55,6 +63,7 @@ public class AllocateSeat extends HttpServlet {
 			String floor = request.getParameter("floorNo");
 			String row = request.getParameter("row_no");
 			String col = request.getParameter("col_no");
+			String email = request.getParameter("textEmail");
 			
 			PreparedStatement preparedStatementToVerify = connection.prepareStatement("select full_name, seat_row, seat_col from seatDetails where floor = ? and seat_row = ? and seat_col = ?;");
 			preparedStatementToVerify.setString(1,floor);
@@ -81,12 +90,13 @@ public class AllocateSeat extends HttpServlet {
 			}else {
 					
 					System.out.println("Working fine till here");
-					PreparedStatement preparedStatementToInseret = connection.prepareStatement("insert into seatDetails values(?, ?, ?, ?, ? )");		
+					PreparedStatement preparedStatementToInseret = connection.prepareStatement("insert into seatDetails values(?, ?, ?, ?, ? , ?)");		
 					preparedStatementToInseret.setString(1,emp_id);
 					preparedStatementToInseret.setString(2,full_name);
-					preparedStatementToInseret.setString(3,floor);
-					preparedStatementToInseret.setString(4,row);
-					preparedStatementToInseret.setString(5,col);
+					preparedStatementToInseret.setString(3,email);
+					preparedStatementToInseret.setString(4,floor);
+					preparedStatementToInseret.setString(5,row);
+					preparedStatementToInseret.setString(6,col);
 					int checkStatus = preparedStatementToInseret.executeUpdate();
 					System.out.println(checkStatus);	
 			        if(checkStatus > 0) {
@@ -94,16 +104,39 @@ public class AllocateSeat extends HttpServlet {
 			            RequestDispatcher requestDispatcher = request.getRequestDispatcher("View.jsp");
 						requestDispatcher.forward(request, response);
 			        }
-				} 
+			        
+			        String to = email;
+			        String from = "rairaunak25@gmail.com";
+			        String password = "lodbktzwiaohwgvg";
+			        String sub = "New Seat Allocated";
+			        
+			        Properties props = new Properties();    
+			          props.put("mail.smtp.host", "smtp.gmail.com");    
+			          props.put("mail.smtp.socketFactory.port", "465");    
+			          props.put("mail.smtp.socketFactory.class",    
+			                    "javax.net.ssl.SSLSocketFactory");    
+			          props.put("mail.smtp.auth", "true");    
+			          props.put("mail.smtp.port", "465");    
+			          
+			          Session session = Session.getDefaultInstance(props,    
+			                  new javax.mail.Authenticator() {    
+			                  protected PasswordAuthentication getPasswordAuthentication() {    
+			                  return new PasswordAuthentication(from,password);  
+			                  }    
+			                 });    
+			          
+			          try {    
+			              MimeMessage message = new MimeMessage(session);    
+			              message.addRecipient(Message.RecipientType.TO,new InternetAddress(to));    
+			              message.setSubject(sub);    
+			              message.setText("Hi! "+full_name+",\n"+"Your New Seat is on floor: "+floor+" /nSeat Number is: "+row+col);    
+			              //send message  
+			              Transport.send(message);    
+			              System.out.println("message sent successfully");    
+			             } catch (MessagingException e) {throw new RuntimeException(e);}   
 			
+				}
 
-			
-
-			
-			
-			
-			
-			
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

@@ -104,7 +104,7 @@ public class RegisterServlet extends HttpServlet {
 		else {
 			
 	
-			String notValidPassword = "Not Valid Password ";
+			String notValidPassword = "Not a Valid Password Format! ";
 			request.setAttribute("displayError", notValidPassword);
 			RequestDispatcher dispatcher = request.getRequestDispatcher("SignUp.jsp");
 			dispatcher.forward(request,response);

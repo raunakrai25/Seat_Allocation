@@ -43,6 +43,11 @@
                       <input type="text" name=textName class="form-control">
                     </div>
 					<br/>
+					<div class="mb-3">
+                      <label class="col-6 form-label">Email address</label>
+                      <input type="email" name=textEmail class="form-control">
+                    </div>
+					<br/>
                     <div class="mb-3">
                         <div class="row">
                             <div class="col-6 form-label" style="padding-left: 15px">Select Floor</div>

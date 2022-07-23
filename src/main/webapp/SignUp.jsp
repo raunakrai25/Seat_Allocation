@@ -10,6 +10,8 @@
 		<title>SignUp</title>
 		<link href="${contextPath}/resource/bootstrap.min.css" rel="stylesheet">
 		<link rel="stylesheet" href="SignUp.css">
+		
+		
 	</head>
 	<body>
 		<%
@@ -21,8 +23,7 @@
 			
 		%>
 		<jsp:include page="./NavbarAfterLogin.html"></jsp:include>
-		<div class="container">
-        <img src="github.png" alt="" class="logo">
+		<div class="container" style="padding-top:6%">
         <div class="title" style="color:red">Add More Operational Team Member </div>
         <div class="row">
             <div class="col-md-4"></div>
@@ -51,7 +52,7 @@
                       <div class="col-6 form-label" id="displayError" style="padding-left: 15px; color: red; "><%=request.getAttribute("displayError") %></div>
                     </div>
                     <br>
-                    <button type="submit" class="btn btn-warning btn-lg btn-block w-200">Sign Up</button>
+                    <button type="submit" id="click" class="btn btn-warning btn-lg btn-block w-200">Sign Up</button>
                   </form>
             </div>
                         
@@ -62,4 +63,6 @@
     
 		
 	</body>
+	
+	
 </html>

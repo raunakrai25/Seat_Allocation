@@ -26,6 +26,7 @@
 			
 		%>
 		<jsp:include page="./NavbarAfterLogin.html"></jsp:include>
+		<div>
 		<div class="header" style="padding-top: 5%">
 			<h1>View Seats</h1>
 			<div class="SeatImage">
@@ -51,15 +52,15 @@
 		  
 		   
 			<h1 align= center>Present Allocated Seats</h1>
-	
-			<table border="1" align= center >
+			<table class="table table-sm table-hover" align= center >
+				<thead class="thead-dark">
 				<tr>
-					<th>ID</th>
-					<th>Full Name</th>
-					<th>Floor</th>
-					<th>Seat Number</th>
+					<th scope="col">ID</th>
+					<th scope="col">Full Name</th>
+					<th scope="col">Floor</th>
+					<th scope="col">Seat Number</th>
 				</tr>
-	
+				</thead>
 				<%
 					Class.forName("com.mysql.cj.jdbc.Driver");
 					String floor = (String)request.getAttribute("floorNo");
@@ -72,12 +73,14 @@
 	
 						while(resultSet.next()){
 				%>
-				<tr>
+				<tbody>
+				<tr class="table-warning">
 					<td><%=resultSet.getString("emp_id") %></td>
 					<td><%=resultSet.getString("full_name") %></td>
 					<td><%=resultSet.getString("floor") %></td>
 					<td><%=resultSet.getString("seat_row") %><%=resultSet.getString("seat_col") %></td>
 				</tr>
+				</tbody>
 				<%
 					}
 						connection.close();
@@ -86,7 +89,9 @@
 					}
 				%>
 			</table> 
-			
-
+			</div>
+			<br>
+			</div>
 	</body>
 </html>
+

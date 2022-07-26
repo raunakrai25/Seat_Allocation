@@ -1,0 +1,11 @@
+@charset "ISO-8859-1";
+.footer{
+	background: #212121;
+}
+p{
+	color:white;
+}
+.text-uppercase{
+	font-weight: bold;
+	color: #ffbb33;
+}

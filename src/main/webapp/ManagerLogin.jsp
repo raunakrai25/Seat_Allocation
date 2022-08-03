@@ -1,7 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<c:set var="contextPath" value="${pageContext.request.contextPath}" />
 <!DOCTYPE html>
 <html>
 	<head>
@@ -16,11 +14,11 @@
 		<jsp:include page="./loginNavbar.html"/>
 		<div class="container">
         <img src="github.png" alt="" class="logo">
-        <div class="title" style="color:red">Login Page for Only Operational Team</div>
+        <div class="title" style="color:red">Login Page for Only Project Manager</div>
         <div class="row">
             <div class="col-md-4"></div>
             <div class="col-md-4 form-container">
-                <form action=LoginServlets method="post" >
+                <form action=LoginManagerServlets method="post" >
                     <div class="mb-3">
                       <label class="col-6 form-label">Email address</label>
                       <input type="email" name=textEmail class="form-control" required>
@@ -31,6 +29,11 @@
                             <div class="col-6 form-label" style="padding-left: 15px">Password</div>
                         </div>
                       <input type="password" name=textPassword class="form-control" required>
+                      <div class="col-6 form-label" id="displayError" style="padding-left: 15px; color: red; "><% String displayError = (String)request.getAttribute("displayError");
+			   			 if (displayError == null){
+			    			displayError = "";
+			   			 }
+			    		%><%=displayError %></div>
                     </div>
                      
                     <br>

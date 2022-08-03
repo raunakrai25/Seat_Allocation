@@ -15,11 +15,11 @@
 			response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
 			
 			if(session.getAttribute("username")==null){
-				response.sendRedirect("ManagerLogin.jsp");
+				response.sendRedirect("login.jsp");
 			}
 			
 		%>
-		<jsp:include page="./NavbarAfterLogin.html"/>
+		<jsp:include page="./managerNavbar.html"/>
 		<div class="header" style="padding:5%">
 			<h1>Welcome, <%=request.getParameter("name")%></h1>
 			<br></br>

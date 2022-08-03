@@ -1,11 +1,9 @@
-package com.seatAllocation.operations;
+package com.seatAllocation.projectManager.copy;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Properties;
 
@@ -24,16 +22,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class AllocateSeat
+ * Servlet implementation class ManagerRequest
  */
-@WebServlet("/AllocateSeat")
-public class AllocateSeat extends HttpServlet {
+@WebServlet("/ManagerRequest")
+public class ManagerRequest extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AllocateSeat() {
+    public ManagerRequest() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -50,14 +48,16 @@ public class AllocateSeat extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		try {
-			PrintWriter out = response.getWriter();
+			
 			Class.forName("com.mysql.cj.jdbc.Driver");
 			Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/seat_allocation", "root", "1234");
 			
 			System.out.print("Connection Established...");
 			
+			String manager_id = request.getParameter("textManagerId");
+			String manager_name = request.getParameter("textManagerName");
+			String manager_email = request.getParameter("textManagerEmail");
 			String emp_id = request.getParameter("textEmpId");
 			String full_name = request.getParameter("textName");
 			String floor = request.getParameter("floorNo");
@@ -65,38 +65,19 @@ public class AllocateSeat extends HttpServlet {
 			String col = request.getParameter("col_no");
 			String email = request.getParameter("textEmail");
 			
-			PreparedStatement preparedStatementToVerify = connection.prepareStatement("select full_name, seat_row, seat_col from seatDetails where floor = ? and seat_row = ? and seat_col = ?;");
-			preparedStatementToVerify.setString(1,floor);
-			preparedStatementToVerify.setString(2,row);
-			preparedStatementToVerify.setString(3,col);
 			
-			ResultSet resultSet = preparedStatementToVerify.executeQuery();
-			
-			System.out.println(resultSet.toString());
-			
-			if(resultSet.next()) {
-				System.out.print("working");
-				String rowDB = resultSet.getString("seat_row");
-				System.out.println("rowDB");
-				String colDB = resultSet.getString("seat_col");
-				System.out.println("colDB");
-				String nameDB = resultSet.getString("full_name");
-				System.out.println("nameDB");
-				if (row.equals(rowDB)&&col.equals(colDB)) {
-					out.println("<font-color=red size=18>Seat already occupied by: "+nameDB);
-					out.println("<a href=/Seat-Allocation/allocateSeat.jsp>Try Again!!</a>");
-				}
-				
-			}else {
 					
 					System.out.println("Working fine till here");
-					PreparedStatement preparedStatementToInseret = connection.prepareStatement("insert into seatDetails values(?, ?, ?, ?, ? , ?)");		
-					preparedStatementToInseret.setString(1,emp_id);
-					preparedStatementToInseret.setString(2,full_name);
-					preparedStatementToInseret.setString(3,email);
-					preparedStatementToInseret.setString(4,floor);
-					preparedStatementToInseret.setString(5,row);
-					preparedStatementToInseret.setString(6,col);
+					PreparedStatement preparedStatementToInseret = connection.prepareStatement("insert into managerRequest values(?, ?, ?, ?, ?, ?, ?, ? , ?)");		
+					preparedStatementToInseret.setString(1,manager_id);
+					preparedStatementToInseret.setString(2,manager_name);
+					preparedStatementToInseret.setString(3,manager_email);
+					preparedStatementToInseret.setString(4,emp_id);
+					preparedStatementToInseret.setString(5,full_name);
+					preparedStatementToInseret.setString(6,email);
+					preparedStatementToInseret.setString(7,floor);
+					preparedStatementToInseret.setString(8,row);
+					preparedStatementToInseret.setString(9,col);
 					int checkStatus = preparedStatementToInseret.executeUpdate();
 					System.out.println(checkStatus);	
 			        if(checkStatus > 0) {
@@ -105,10 +86,10 @@ public class AllocateSeat extends HttpServlet {
 						requestDispatcher.forward(request, response);
 			        }
 			        
-			        String to = email;
+			        String to = manager_email;
 			        String from = "rairaunak25@gmail.com";
 			        String password = "lodbktzwiaohwgvg";
-			        String sub = "New Seat Allocated";
+			        String sub = "Request Send";
 			        
 			        Properties props = new Properties();    
 			          props.put("mail.smtp.host", "smtp.gmail.com");    
@@ -129,12 +110,12 @@ public class AllocateSeat extends HttpServlet {
 			              MimeMessage message = new MimeMessage(session);    
 			              message.addRecipient(Message.RecipientType.TO,new InternetAddress(to));    
 			              message.setSubject(sub);    
-			              message.setText("Hi! "+full_name+",\n"+"Your New Seat is on floor: "+floor+" \nSeat Number is: "+row+col);
+			              message.setText("Request send for Seat Number: "+row+col);
 			              Transport.send(message);    
 			              System.out.println("message sent successfully");    
 			             } catch (MessagingException e) {throw new RuntimeException(e);}   
 			
-				}
+				
 
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block

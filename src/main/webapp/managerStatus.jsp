@@ -12,7 +12,7 @@
 <html>
 	<head>
 		<meta charset="ISO-8859-1">
-		<title>View Seats</title>
+		<title>Status</title>
 		<link href="${contextPath}/resource/bootstrap.min.css" rel="stylesheet">
 		<link rel="stylesheet" type="text/css" href="<c:url value = "View.css" />" /> 
 	</head>
@@ -25,67 +25,50 @@
 			}
 			
 		%>
-		<jsp:include page="./NavbarAfterLogin.html"></jsp:include>
+		<jsp:include page="./managerNavbar.html"></jsp:include>
 		<div>
 		<div class="header" style="padding-top: 5%">
-			<h1>View Seats</h1>
-			<div class="SeatImage">
-				<img class="seatImage" src="Images/Hall-seats.jpg"/>
-			</div>
+			<h1>Status</h1>
+			
 		</div>
-		<form action=getSeatCount method="post">
+		<form action="StatusServlets" method="post">
 			<div class="input-group"  >
-		    	<input type="text" class="form-control" name="Floor_no" placeholder="Enter the Floor..." required>
-		 		<button class="btn btn-warning btn-block" type="submit" >Check</button>
+		    	<input type="text" class="form-control" name="managerid" placeholder="Enter the your Manager_ID..." required>
+		 		<button class="btn btn-warning btn-block" type="submit" >Check status</button>
 		  	</div>
 	  	</form>
-			<div class="card" style="width: 40rem;" >
-			  	<div class="card-body">
-			    <h4 class="card-title">Allocated Seats</h4>
-			    <p class="card-text"><%
-			    String allocated = (String)request.getAttribute("Allocated");
-			    if (allocated == null){
-			    	allocated = "Select Floor";
-			    }
-			     %><%=allocated %></p>
-		   		</div>
-		   		<div class="card-body">
-			    <h4 class="card-title">Available seats</h4>
-			    <p class="card-text"><% String available = (String)request.getAttribute("Available");
-			    if (available == null){
-			    	available = "Select Floor";
-			    }
-			    %><%=available %></p>
-		   		</div>
-		    </div>
 		  	<hr class= "mb-4" style="font-weight: 900;">
 		   
-			<h1 align= center>Present Allocated Seats</h1>
+			<h1 align= center>You have requested for ...</h1>
 			<table class="table table-sm table-hover" align= center style="Width:90%">
 				<thead class="thead-dark">
 				<tr>
-					<th scope="col">ID</th>
-					<th scope="col">Full Name</th>
+					<th scope="col">Manager ID</th>
+					<th scope="col">Manager Name</th>
+					<th scope="col">Employee ID</th>
+					<th scope="col">Employee Name</th>
 					<th scope="col">Floor</th>
 					<th scope="col">Seat Number</th>
 				</tr>
 				</thead>
 				<%
 					Class.forName("com.mysql.cj.jdbc.Driver");
-					String floor = (String)request.getAttribute("floorNo");
+					String manager_id = (String)request.getAttribute("manager-id");
 					
 					try{
 						Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/seat_allocation", "root", "1234");
-						PreparedStatement preparedStatement = connection.prepareStatement("SELECT * from  seatDetails where floor=? ;");
-						preparedStatement.setString(1,floor);
+						PreparedStatement preparedStatement = connection.prepareStatement("SELECT * from  managerRequest where Manager_ID=? ;");
+						preparedStatement.setString(1, manager_id);
 						ResultSet resultSet = preparedStatement.executeQuery();
 	
 						while(resultSet.next()){
 				%>
 				<tbody>
 				<tr class="table-warning">
-					<td><%=resultSet.getString("emp_id") %></td>
-					<td><%=resultSet.getString("full_name") %></td>
+					<td><%=resultSet.getString("Manager_ID") %></td>
+					<td><%=resultSet.getString("Manager_Name") %></td>
+					<td><%=resultSet.getString("employee_ID") %></td>
+					<td><%=resultSet.getString("employee_fullName") %></td>
 					<td><%=resultSet.getString("floor") %></td>
 					<td><%=resultSet.getString("seat_row") %><%=resultSet.getString("seat_col") %></td>
 				</tr>
@@ -100,7 +83,7 @@
 			</table> 
 			</div>
 			<br>
-			</div>
+			
 	</body>
 </html>
 

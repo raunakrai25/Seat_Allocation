@@ -6,7 +6,7 @@
 <html>
 	<head>
 		<meta charset="ISO-8859-1">
-		<title>Allocate Seat</title>
+		<title>Request Seats</title>
 		<link href="${contextPath}/resource/bootstrap.min.css" rel="stylesheet">
 		<link rel="stylesheet" type="text/css" href="<c:url value = "allocateSeat.css" />" /> 
 		<link rel="stylesheet" type="text/css" href="<c:url value = "login.css" />" />
@@ -16,13 +16,13 @@
 			response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
 			
 			if(session.getAttribute("username")==null){
-				response.sendRedirect("login.jsp");
+				response.sendRedirect("ManagerLogin.jsp");
 			}
 			
 		%>
-		<jsp:include page="./NavbarAfterLogin.html"></jsp:include>
+		<jsp:include page="./managerNavbar.html"></jsp:include>
 		<div class="header" align=center style="padding-top: 5%">
-			<h1>Allocate Seat</h1>
+			<h1>Select Seat</h1>
 			<div class="SeatImage">
 				<img class="seatImage" src="Images/Hall-seats.jpg"/>
 			</div>
@@ -32,9 +32,24 @@
 		<div class="row">
             <div class="col-md-4"></div>
             <div class="col-md-4 form-container">
-                <form action=AllocateSeat method="post">
+                <form action=ManagerRequest method="post">
+                	<div class="mb-3">
+                      <label class="col-6 form-label"> Manager ID</label>
+                      <input type="text" name=textManagerId class="form-control" required>
+                    </div>
+					<br/>
+					<div class="mb-3">
+                      <label class="col-6 form-label"> Manager Name</label>
+                      <input type="text" name=textManagerName class="form-control" required>
+                    </div>
+					<br/>
+					<div class="mb-3">
+                      <label class="col-6 form-label"> Manager Email</label>
+                      <input type="email" name=textManagerEmail class="form-control" required>
+                    </div>
+					<br/>
                     <div class="mb-3">
-                      <label class="col-6 form-label">Employee ID</label>
+                      <label class="col-6 form-label"> Employee ID</label>
                       <input type="text" name=textEmpId class="form-control" required>
                     </div>
 					<br/>
@@ -99,7 +114,7 @@
 					  </select>
                     </div>
                     <br>
-                    <button type="submit" class="btn btn-warning btn-lg btn-block w-200">Allocate Seat</button>
+                    <button type="submit" class="btn btn-warning btn-lg btn-block w-200">Ask</button>
                   </form>
             </div>
                         

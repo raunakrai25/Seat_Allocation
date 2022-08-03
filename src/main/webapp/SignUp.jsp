@@ -31,25 +31,29 @@
                 <form action=RegisterServlet method="post" >
                 	<div class="mb-3">
                       <label class="col-6 form-label">Full Name</label>
-                      <input type="text" name=textName class="form-control">
+                      <input type="text" name=textName class="form-control" required>
                     </div>
 					<br/>
 					<div class="mb-3">
                       <label class="col-6 form-label">Employee ID</label>
-                      <input type="text" name=textEmp_id class="form-control">
+                      <input type="text" name=textEmp_id class="form-control" required>
                     </div>
 					<br/>
                     <div class="mb-3">
                       <label class="col-6 form-label">Email address</label>
-                      <input type="email" name=textEmail class="form-control">
+                      <input type="email" name=textEmail class="form-control" required>
                     </div>
 					<br/>
                     <div class="mb-3">
                         <div class="row">
                             <div class="col-6 form-label" style="padding-left: 15px">Password</div>
                         </div>
-                      <input type="password" name=textPassword class="form-control" id="changePasswordForm" >
-                      <div class="col-6 form-label" id="displayError" style="padding-left: 15px; color: red; "><%=request.getAttribute("displayError") %></div>
+                      <input type="password" name=textPassword class="form-control" id="changePasswordForm" required >
+                      <div class="col-6 form-label" id="displayError" style="padding-left: 15px; color: red; "><% String displayError = (String)request.getAttribute("displayError");
+			   			 if (displayError == null){
+			    			displayError = "";
+			   			 }
+			    		%><%=displayError %></div>
                     </div>
                     <br>
                     <button type="submit" id="click" class="btn btn-warning btn-lg btn-block w-200">Sign Up</button>

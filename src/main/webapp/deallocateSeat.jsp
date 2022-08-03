@@ -30,15 +30,15 @@
                 <form action=DeallocateSeat method="post">
                     <div class="mb-3">
                       <label class="col-6 form-label">Employee ID</label>
-                      <input type="text" name=textEmpId class="form-control">
+                      <input type="text" name=textEmpId class="form-control" required>
                     </div>
 					<br/>
                     <div class="mb-3">
                         <div class="row">
                             <div class="col-6 form-label" style="padding-left: 15px">Select Floor</div>
                         </div>
-                      <select name="floorNo" class="form-select" aria-label=".form-select-lg example" style="color:black">
-						  <option selected>Open this select menu</option>
+                      <select name="floorNo" class="form-select" aria-label=".form-select-lg example" style="color:black" required>
+						  <option value="">Open this select menu</option>
 						  <option value="1">1</option>
 						  <option value="2">2</option>
 						  <option value="3">3</option>

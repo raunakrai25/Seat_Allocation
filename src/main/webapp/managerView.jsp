@@ -25,7 +25,7 @@
 			}
 			
 		%>
-		<jsp:include page="./NavbarAfterLogin.html"></jsp:include>
+		<jsp:include page="./managerNavbar.html"></jsp:include>
 		<div>
 		<div class="header" style="padding-top: 5%">
 			<h1>View Seats</h1>

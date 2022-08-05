@@ -31,6 +31,11 @@
                             <div class="col-6 form-label" style="padding-left: 15px">Password</div>
                         </div>
                       <input type="password" name=textPassword class="form-control" required>
+                      <div class="col-6 form-label" id="displayError" style="padding-left: 15px; color: red; "><% String displayError = (String)request.getAttribute("displayError");
+			   			 if (displayError == null){
+			    			displayError = "";
+			   			 }
+			    		%><%=displayError %></div>
                     </div>
                      
                     <br>

@@ -129,7 +129,7 @@ public class AllocateSeat extends HttpServlet {
 			              MimeMessage message = new MimeMessage(session);    
 			              message.addRecipient(Message.RecipientType.TO,new InternetAddress(to));    
 			              message.setSubject(sub);    
-			              message.setText("Hi! "+full_name+",\n"+"Your New Seat is on floor: "+floor+" \nSeat Number is: "+row+col);
+			              message.setText("Hi! "+full_name+",\n"+"Your New Seat is on floor: "+floor+" \nSeat Number is: "+row+col+"\n\nFrom Operational Team IN TIME TEC ");
 			              Transport.send(message);    
 			              System.out.println("message sent successfully");    
 			             } catch (MessagingException e) {throw new RuntimeException(e);}   

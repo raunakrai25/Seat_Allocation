@@ -1,7 +1,6 @@
 package com.seatAllocation.Authentication.controller;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -46,7 +45,6 @@ public class LoginServlets extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		try {
-			PrintWriter out = response.getWriter();
 			Class.forName("com.mysql.cj.jdbc.Driver");
 			Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/seat_allocation", "root", "1234");
 			String email = request.getParameter("textEmail");
@@ -71,8 +69,9 @@ public class LoginServlets extends HttpServlet {
 //				requestDispatcher.forward(request, response);
 			}
 			else {
+				String wrong = "Invalid Password or Email";
+	            request.setAttribute("displayError", wrong);
 				RequestDispatcher requestDispatcher = request.getRequestDispatcher("login.jsp");
-	            out.println("<font color=red>Password is wrong.</font>");
 	            requestDispatcher.include(request, response);
 			}
 			

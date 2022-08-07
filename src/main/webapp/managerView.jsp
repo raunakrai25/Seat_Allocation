@@ -42,20 +42,25 @@
 			<div class="card" style="width: 40rem;" >
 			  	<div class="card-body">
 			    <h4 class="card-title">Allocated Seats</h4>
-			    <p class="card-text"><%
+			    <p class="card-text" id="textValue"><%
 			    String allocated = (String)request.getAttribute("Allocated");
 			    if (allocated == null){
-			    	allocated = "Select Floor";
+			    	allocated = "Select Floor";%>
+			    	<p class="card-text" id="textValue"  style="color:#A9A9A9">
+			    <%	
 			    }
-			     %><%=allocated %></p>
+			     %>
+			     
+			     <strong><%=allocated %></strong></p>
 		   		</div>
 		   		<div class="card-body">
 			    <h4 class="card-title">Available seats</h4>
-			    <p class="card-text"><% String available = (String)request.getAttribute("Available");
+			    <p class="card-text" id="textValue"><% String available = (String)request.getAttribute("Available");
 			    if (available == null){
-			    	available = "Select Floor";
+			    	available = "Select Floor";%>
+			    	<p class="card-text" id="textValue"  style="color:#A9A9A9"><%
 			    }
-			    %><%=available %></p>
+			    %><strong><%=available %></strong></p>
 		   		</div>
 		    </div>
 		  	<hr class= "mb-4" style="font-weight: 900;">

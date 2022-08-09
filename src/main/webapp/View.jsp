@@ -26,7 +26,7 @@
 			
 		%>
 		<jsp:include page="./NavbarAfterLogin.html"></jsp:include>
-		<div>
+		
 		<div class="header" style="padding-top: 5%">
 			<h1>View Seats</h1>
 			<div class="SeatImage">
@@ -66,6 +66,8 @@
 		  	<hr class= "mb-4" style="font-weight: 900;">
 		   
 			<h1 align= center>Present Allocated Seats</h1>
+			
+			<div class="innerscroller" style="overflow: auto; height: 230px">
 			<table class="table table-sm table-hover" align= center style="Width:90%">
 				<thead class="thead-dark">
 				<tr>

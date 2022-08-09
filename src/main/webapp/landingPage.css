@@ -1,5 +1,10 @@
 @charset "ISO-8859-1";
 
+body{
+	background-color: rgb(234, 167, 42);
+	
+}
+
 .header{
 	color: black;
 	text-align: center;

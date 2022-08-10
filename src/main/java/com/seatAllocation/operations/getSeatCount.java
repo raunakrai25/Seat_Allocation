@@ -1,4 +1,4 @@
-package com.seatAllocation.Authentication.controller;
+package com.seatAllocation.operations;
 
 import java.io.IOException;
 import java.io.PrintWriter;
